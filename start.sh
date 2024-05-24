@@ -11,11 +11,11 @@ mkdir postgres
 touch postgres/{Dockerfile,create-databases.sh}
 
 # Aplicação
-mkdir -p dundie/{models,routes}
-touch dundie/default.toml
-touch dundie/{__init__,cli,app,auth,db,security,config}.py
-touch dundie/models/{__init__,account,user}.py
-touch dundie/routes/{__init__,auth,account,user}.py
+mkdir -p prev/{models,routes}
+touch prev/default.toml
+touch prev/{__init__,cli,app,auth,db,security,config}.py
+touch prev/models/{__init__,account,user}.py
+touch prev/routes/{__init__,auth,account,user}.py
 
 # Testes
 touch test.sh

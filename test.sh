@@ -1,13 +1,13 @@
 #!/usr/bin/bash
 
 # Start environment with docker compose
-DUNDIE_DB=dundie_test docker compose up -d
+PREV_DB=prev_test docker compose up -d
 
 # wait 5 seconds
 sleep 5
 
 # Ensure database is clean
-docker compose exec api dundie reset-db -f
+docker compose exec api prev reset-db -f
 docker compose exec api alembic stamp base
 
 # run migrations

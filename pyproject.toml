@@ -1,16 +1,16 @@
 [project]
-name = "dundie"
-description = "Rewards API for Dunder Mifflin"
+name = "prev"
+description = "API"
 authors = [
-    {name = 'Bruno Rocha', email = 'rochacbruno@gmail.com'},
+    {name = 'Evaristo Ferreira', email = 'evaristofm@gmail.com'},
 ]
 requires-python = ">=3.8"
 license = {text = "MIT"}
 dynamic = ["version", "readme", "dependencies"]
 
 [project.urls]
-Homepage = 'https://github.com/rochacbruno/dundie-api'
-Source = 'https://github.com/rochacbruno/dundie-api'
+Homepage = 'https://github.com/evaristofm/brasil-prev-api'
+Source = 'https://github.com/evaristofm/brasil-prev-api'
 
 [project.optional-dependencies]
 dev = [
@@ -25,17 +25,17 @@ dev = [
 ]
 
 [project.scripts]
-dundie = "dundie.cli:main"
+prev = "prev.cli:main"
 
 [build-system]
 requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["dundie"]
+packages = ["prev"]
 
 [tool.setuptools_scm]
-write_to = "dundie/VERSION.txt"
+write_to = "prev/VERSION.txt"
 
 [tool.setuptools.dynamic]
 readme = {file = ["docs/README.md"]}
@@ -50,7 +50,7 @@ filterwarnings = [
 ]
 
 [tool.coverage.run]
-source = ['dundie']
+source = ['prev']
 branch = true
 context = '${CONTEXT}'
 
@@ -71,7 +71,7 @@ skip-string-normalization = true
 
 [tool.isort]
 line_length = 100
-known_first_party = 'dundie'
+known_first_party = 'prev'
 multi_line_output = 3
 include_trailing_comma = true
 force_grid_wrap = 0
