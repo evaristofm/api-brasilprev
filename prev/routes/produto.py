@@ -14,7 +14,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=List[ProdutoRequest])
-async def list_users(*, session: Session = ActiveSession):
+async def get_all_produtos(*, session: Session = ActiveSession):
     """Lista produtos."""
     clientes = session.exec(select(Produto)).all()
     return clientes

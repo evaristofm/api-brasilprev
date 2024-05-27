@@ -1,30 +1,41 @@
-import uuid
+from datetime import datetime
 from typing import List
-from fastapi import APIRouter, status
+from fastapi import APIRouter
 from fastapi.exceptions import HTTPException
-from sqlmodel import Session, select
+from sqlmodel import Session
 
+from prev.routes import crud
 from prev.db import ActiveSession
-from prev.models.user import Plano
-from prev.serializers import PlanoRequest, PlanoResponseId
+from prev.serializers import PlanoRequest, PlanoResponseId, AporteExtraRequest, AporteExtraIdResponse
 
 
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[PlanoRequest])
-async def list_users(*, session: Session = ActiveSession):
-    """Lista planos."""
-    clientes = session.exec(select(Plano)).all()
-    return clientes
+# @router.get("/", response_model=List[PlanoRequest])
+# async def list_users(*, session: Session = ActiveSession):
+#     """Lista planos."""
+#     clientes = crud.get_plano_all(db=session)
+#     return clientes
 
 
-@router.post("/", response_model=PlanoResponseId, status_code=status.HTTP_201_CREATED)
-async def create_user(*, session: Session = ActiveSession, cliente: PlanoRequest):
+@router.post("/", response_model=PlanoResponseId, status_code=201)
+async def create_plano(*, session: Session = ActiveSession, plano_request: PlanoRequest):
     """Criar novos planos"""
-    db_plano = Plano(**cliente.model_dump(), id=uuid.uuid4())
-    session.add(db_plano)
-    session.commit()
-    session.refresh(db_plano)
+    db_produto = crud.get_produto(db=session, producto_id=plano_request.idProduto)
+
+    if not db_produto:
+        raise HTTPException(status_code=404, detail="Producto não encontrado!")
+    if db_produto.expiracaoDeVenda < datetime.now():
+        raise HTTPException(status_code=400, detail="Data de venda do produto expirado")
+    if plano_request.aporte < db_produto.valorMinimoAporteInicial:
+        raise HTTPException(status_code=400, detail="A contribuição inicial é inferior ao mínimo exigido")
+    
+
+    #TODO: Adicionar regras de idade, entrada e saida
+    
+    db_plano = crud.create_plano(db=session, plano=plano_request)
     return db_plano
+
+

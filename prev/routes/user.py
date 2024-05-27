@@ -13,14 +13,14 @@ router = APIRouter()
 
 
 @router.get("/", response_model=List[ClienteResponse])
-async def list_users(*, session: Session = ActiveSession):
+async def get_all_clientes(*, session: Session = ActiveSession):
     """List all users."""
     clientes = session.exec(select(Cliente)).all()
     return clientes
 
 
 @router.post("/", response_model=ClienteResponseId, status_code=status.HTTP_201_CREATED)
-async def create_user(*, session: Session = ActiveSession, cliente: ClienteRequest):
+async def create_cliente(*, session: Session = ActiveSession, cliente: ClienteRequest):
     """Criar novos clientes"""
     db_cliente = Cliente(**cliente.model_dump(), id=uuid.uuid4())
     session.add(db_cliente)

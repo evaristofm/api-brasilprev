@@ -10,7 +10,7 @@ class ClienteRequest(BaseModel):
     email: str
     dataDeNascimento: datetime
     genero: str
-    rendaMensal: Decimal
+    rendaMensal: float
 
 
 class ClienteResponse(ClienteRequest):
@@ -25,8 +25,8 @@ class ProdutoRequest(BaseModel):
     nome: str 
     susep: str 
     expiracaoDeVenda: datetime 
-    valorMinimoAporteInicial: Decimal 
-    valorMinimoAporteExtra: Decimal 
+    valorMinimoAporteInicial: float 
+    valorMinimoAporteExtra: float 
     idadeDeEntrada: int
     idadeDeSaida: int
     carenciaInicialDeResgate: int
@@ -52,7 +52,7 @@ class PlanoResponseId(BaseModel):
 class AporteExtraRequest(BaseModel):
     idCliente: uuid.UUID
     idPlano: uuid.UUID
-    valorAporte: float
+    valorAporte: Decimal
 
 
 class AporteExtraIdResponse(BaseModel):
@@ -61,7 +61,7 @@ class AporteExtraIdResponse(BaseModel):
 
 class ResgateRequest(BaseModel):
     idPlano: uuid.UUID
-    valorResgate: float
+    valorResgate: Decimal
 
 
 class ResgateIdResponse(BaseModel):
