@@ -13,29 +13,34 @@ from prev.serializers import PlanoRequest, PlanoResponseId, AporteExtraRequest, 
 router = APIRouter()
 
 
-# @router.get("/", response_model=List[PlanoRequest])
-# async def list_users(*, session: Session = ActiveSession):
-#     """Lista planos."""
-#     clientes = crud.get_plano_all(db=session)
-#     return clientes
+@router.get("/", response_model=List[PlanoRequest])
+async def get_plano_all(*, session: Session = ActiveSession):
+    """Lista planos."""
+    clientes = crud.get_plano_all(db=session)
+    return clientes
 
 
 @router.post("/", response_model=PlanoResponseId, status_code=201)
 async def create_plano(*, session: Session = ActiveSession, plano_request: PlanoRequest):
     """Criar novos planos"""
     db_produto = crud.get_produto(db=session, producto_id=plano_request.idProduto)
+    db_cliente = crud.get_cliente(db=session, cliente_id=plano_request.idCliente)
 
     if not db_produto:
         raise HTTPException(status_code=404, detail="Producto não encontrado!")
     if db_produto.expiracaoDeVenda < datetime.now():
         raise HTTPException(status_code=400, detail="Data de venda do produto expirado")
+    
     if plano_request.aporte < db_produto.valorMinimoAporteInicial:
         raise HTTPException(status_code=400, detail="A contribuição inicial é inferior ao mínimo exigido")
     
+    idade =  datetime.now().year - db_cliente.dataDeNascimento.year
 
-    #TODO: Adicionar regras de idade, entrada e saida
+    if idade < db_produto.idadeDeEntrada or idade > db_produto.idadeDeSaida:
+        raise HTTPException(status_code=400, detail="Idade do cliente não permitida para a contratação do plano. Idade permitida apartir {db_produto.idadeDeEntrada}")
     
     db_plano = crud.create_plano(db=session, plano=plano_request)
+    
     return db_plano
 
 

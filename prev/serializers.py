@@ -66,4 +66,7 @@ class ResgateRequest(BaseModel):
 
 class ResgateIdResponse(BaseModel):
     id: uuid.UUID
-    
+
+
+
+datetime.strptime("2024-06-01 01:48:30.650779", "%Y-%m-%d %H:%M:%S.%f") - datetime.strptime("1996-03-05 01:48:30.650779", "%Y-%m-%d %H:%M:%S.%f")
