@@ -44,8 +44,7 @@ class Plano(SQLModel, table=True):
     
     idCliente: uuid_pkg.UUID = Field(foreign_key="cliente.id")
     idProduto: uuid_pkg.UUID = Field(foreign_key="produto.id")
-
-    aporte: str = Field(nullable=False)
+    aporte: Decimal = Field(nullable=False)
     dataDaContratacao: datetime = Field(nullable=False)
     idadeDeAposentadoria: int = Field(nullable=False)
 

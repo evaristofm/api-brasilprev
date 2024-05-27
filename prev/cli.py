@@ -36,7 +36,7 @@ def shell():
 @main.command()
 def cliente_list():
     """Lists all users"""
-    table = Table(title="dundie users")
+    table = Table(title="prev clientes")
     fields = ["nome", "cpf", "email", "dataDeNascimento", "genero", "rendaMensal"]
     for header in fields:
         table.add_column(header, style="magenta")
