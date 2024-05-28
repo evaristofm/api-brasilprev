@@ -1,8 +1,8 @@
-"""add table initial
+"""INITIAL
 
-Revision ID: d41670a2e090
+Revision ID: e0ee602af5e0
 Revises: 
-Create Date: 2024-05-25 21:18:37.817594
+Create Date: 2024-05-28 06:10:28.308727
 
 """
 from typing import Sequence, Union
@@ -13,7 +13,7 @@ import sqlmodel
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'd41670a2e090'
+revision: str = 'e0ee602af5e0'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -52,6 +52,7 @@ def upgrade() -> None:
     sa.Column('id', sqlmodel.sql.sqltypes.GUID(), nullable=False),
     sa.Column('idCliente', sqlmodel.sql.sqltypes.GUID(), nullable=False),
     sa.Column('idProduto', sqlmodel.sql.sqltypes.GUID(), nullable=False),
+    sa.Column('aporte', sa.Numeric(), nullable=False),
     sa.Column('dataDaContratacao', sa.DateTime(), nullable=False),
     sa.Column('idadeDeAposentadoria', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['idCliente'], ['cliente.id'], ),
@@ -73,6 +74,7 @@ def upgrade() -> None:
     sa.Column('id', sqlmodel.sql.sqltypes.GUID(), nullable=False),
     sa.Column('idPlano', sqlmodel.sql.sqltypes.GUID(), nullable=False),
     sa.Column('valorResgate', sa.Numeric(), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['idPlano'], ['plano.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

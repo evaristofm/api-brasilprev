@@ -1,7 +1,12 @@
 import uuid
 from sqlmodel import Session, select
 
-from prev.models.user import Cliente, Produto, Plano, AporteExtra, Resgate
+from prev.models.cliente import Cliente
+from prev.models.produto import Produto
+from prev.models.plano import Plano
+from prev.models.aporte import AporteExtra
+from prev.models.resgate import Resgate
+
 from prev import serializers
 
 

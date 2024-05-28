@@ -5,11 +5,11 @@ from pydantic import BaseModel
 
 
 class ClienteRequest(BaseModel):
-    cpf: str
     nome: str
+    cpf: str
     email: str
-    dataDeNascimento: datetime
     genero: str
+    dataDeNascimento: datetime
     rendaMensal: float
 
 
@@ -53,7 +53,7 @@ class AporteExtraRequest(BaseModel):
     idCliente: uuid.UUID
     idPlano: uuid.UUID
     valorAporte: Decimal
-
+    
 
 class AporteExtraIdResponse(BaseModel):
     id: uuid.UUID
@@ -66,7 +66,3 @@ class ResgateRequest(BaseModel):
 
 class ResgateIdResponse(BaseModel):
     id: uuid.UUID
-
-
-
-datetime.strptime("2024-06-01 01:48:30.650779", "%Y-%m-%d %H:%M:%S.%f") - datetime.strptime("1996-03-05 01:48:30.650779", "%Y-%m-%d %H:%M:%S.%f")

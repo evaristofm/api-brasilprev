@@ -6,7 +6,7 @@ from rich.table import Table
 from sqlmodel import Session, select
 
 from .config import settings
-from .db import engine
+from .db import engine, SQLModel
 from .models import Cliente
 
 main = typer.Typer(name="prev CLI", add_completion=False)
@@ -35,7 +35,7 @@ def shell():
 
 @main.command()
 def cliente_list():
-    """Lists all users"""
+    """Lista de clientes"""
     table = Table(title="prev clientes")
     fields = ["nome", "cpf", "email", "dataDeNascimento", "genero", "rendaMensal"]
     for header in fields:
@@ -72,3 +72,15 @@ def create_cliente(
         session.refresh(cliente)
         typer.echo(f"created {cliente.nome} cliente")
         return cliente
+    
+
+@main.command()
+def reset_db(
+    force: bool = typer.Option(
+        False, "--force", "-f", help="Run with no confirmation"
+    )
+):
+    """Resets the database tables"""
+    force = force or typer.confirm("Are you sure?")
+    if force:
+        SQLModel.metadata.drop_all(engine)

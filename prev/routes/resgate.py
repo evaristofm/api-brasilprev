@@ -7,7 +7,7 @@ from sqlmodel import Session, select
 from prev.routes import crud
 from prev.utils import calcula_data_carencia
 from prev.db import ActiveSession
-from prev.models.user import Resgate
+from prev.models.resgate import Resgate
 from prev.serializers import ResgateRequest, ResgateIdResponse
 
 
@@ -36,7 +36,7 @@ async def create_resgate(*, session: Session = ActiveSession, resgate_request: R
     dias_diferenca = calcula_data_carencia(db_plano.dataDaContratacao, data_atual)
 
     if dias_diferenca < db_produto.carenciaInicialDeResgate:
-        return dias_diferenca
+        raise HTTPException(status_code=400, detail="Plano ainda está no período de carência")
 
     if db_plano.aporte < resgate_request.valorResgate:
         raise HTTPException(status_code=400, detail="Saldo insuficiente para resgate.")

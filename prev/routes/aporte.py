@@ -5,7 +5,7 @@ from sqlmodel import Session, select
 
 from prev.routes import crud
 from prev.db import ActiveSession
-from prev.models.user import AporteExtra
+from prev.models.aporte import AporteExtra
 from prev.serializers import AporteExtraRequest, AporteExtraIdResponse
 
 

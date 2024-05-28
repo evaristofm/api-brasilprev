@@ -41,7 +41,7 @@ jobs:
           removeArtifacts: true
           draft: false
           tag: ${{ steps.previoustag.outputs.tag }}
-          artifacts: "./docs/book/epub/Prev API - Curso Python LINUXtips.epub"
+          
 
       - name: Deploy to GitHub Pages 🚀
         if: ${{ github.event_name != 'pull_request' }}

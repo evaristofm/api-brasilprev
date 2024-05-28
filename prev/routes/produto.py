@@ -5,7 +5,7 @@ from fastapi.exceptions import HTTPException
 from sqlmodel import Session, select
 
 from prev.db import ActiveSession
-from prev.models.user import Produto
+from prev.models.produto import Produto
 from prev.serializers import ProdutoRequest, ProdutoResponseId
 
 
@@ -21,7 +21,7 @@ async def get_all_produtos(*, session: Session = ActiveSession):
 
 
 @router.post("/", response_model=ProdutoResponseId, status_code=status.HTTP_201_CREATED)
-async def create_user(*, session: Session = ActiveSession, cliente: ProdutoRequest):
+async def create_produto(*, session: Session = ActiveSession, cliente: ProdutoRequest):
     """Criar novos produtos"""
     db_produto = Produto(**cliente.model_dump(), id=uuid.uuid4())
     session.add(db_produto)

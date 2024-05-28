@@ -1,4 +1,8 @@
 from sqlmodel import SQLModel
-from .user import Cliente
+from .cliente import Cliente
+from .produto import Produto
+from .aporte import AporteExtra
+from .resgate import Resgate
+from .plano import Plano
 
-__all__ = ["Cliente", "SQLModel"]
+__all__ = ["Cliente", "Produto" ,"AporteExtra", "Resgate", "Plano", "SQLModel"]
