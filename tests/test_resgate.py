@@ -36,7 +36,7 @@ def test_cadastro_resgate_retorno_201(api_client):
     plano_response = api_client.post('/plano/', json=json.loads(plano_data)).json()
 
     resgate_data = json.dumps({
-        'idPlano': plano_response.get('id'),
+        'idPlano': plano_response.get("id"),
         'valorResgate': 1000
     })
 
