@@ -19,11 +19,19 @@ $ git git@github.com:evaristofm/api-brasilprev.git
 
 ```
 
-O próximo passo é estando na raiz do repositório executar:
+próximo passo: no diretorio raiz do repositório executar:
 
 
 ```
-docker compose up -d
+docker compose up -d --build
+
+```
+
+próximo passo: execute as migraões do projeto usando docker compose + alembic
+
+
+```
+docker compose exec api prev alembic upgrade head
 
 ```
 

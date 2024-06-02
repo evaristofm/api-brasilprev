@@ -2,9 +2,10 @@ from datetime import datetime
 from typing import List
 from fastapi import APIRouter
 from fastapi.exceptions import HTTPException
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from prev.routes import crud
+from prev.models.plano import Plano
 from prev.db import ActiveSession
 from prev.serializers import PlanoRequest, PlanoResponseId, AporteExtraRequest, AporteExtraIdResponse
 
@@ -16,8 +17,8 @@ router = APIRouter()
 @router.get("/", response_model=List[PlanoRequest])
 async def get_plano_all(*, session: Session = ActiveSession):
     """Lista planos."""
-    clientes = crud.get_plano_all(db=session)
-    return clientes
+    planos = session.exec(select(Plano)).all()
+    return planos
 
 
 @router.post("/", response_model=PlanoResponseId, status_code=201)
@@ -28,9 +29,10 @@ async def create_plano(*, session: Session = ActiveSession, plano_request: Plano
 
     if not db_produto:
         raise HTTPException(status_code=404, detail="Produto não encontrado!")
+    
     if db_produto.expiracaoDeVenda < datetime.now():
         raise HTTPException(status_code=400, detail="Data de venda do produto expirado")
-    
+
     if plano_request.aporte < db_produto.valorMinimoAporteInicial:
         raise HTTPException(status_code=400, detail="A contribuição inicial é inferior ao mínimo exigido.")
     
