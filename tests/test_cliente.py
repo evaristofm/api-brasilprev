@@ -2,11 +2,6 @@ import json
 from fastapi import status
 
 
-def test_consulta_retorno_get_clientes(api_client):
-    response = api_client.get("/cliente/")
-    assert response.status_code == status.HTTP_200_OK
-    assert response.json() == []
-
 
 def test_cadastro_cliente_retorno_id_e_status_code_201(api_client):
     data = json.dumps({

@@ -35,9 +35,20 @@ docker compose exec api prev alembic upgrade head
 
 ```
 
-Acessando a documentação SWAGGER da API
+Evidencias de Testes (ambiente linux)
+
+```
+$ ./tests.sh
+
+```
+
+Evidencias REST
+
 
 ```
 http://localhost:8000/docs
 
 ```
+
+=== Video Endpoints ===
+

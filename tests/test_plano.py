@@ -22,13 +22,13 @@ PRODUTO_DATA = json.dumps({
     })
 
 
-def test_cadastro_plano(api_client):
+def test_cadastro_plano_retorno_id_status_code_201(api_client):
     cliente_data = json.dumps({
         'nome': 'Julio',
         'cpf': '11111111111',
         'email': 'julio21@gmail.com',
         'genero': 'Masculino',
-        'dataDeNascimento': '1992-05-31T13:58:44.777000Z',
+        'dataDeNascimento': '1990-05-31T13:58:44.777000Z',
         'rendaMensal': 2889.5})
     
     produto_data = json.dumps({
@@ -48,7 +48,7 @@ def test_cadastro_plano(api_client):
     plano_data = json.dumps({
         'idCliente': cliente_response.get('id'),
         'idProduto': produto_response.get('id'),
-        'aporte': 15000,
+        'aporte': float(15000),
         'dataDaContratacao': '2023-01-01T13:58:44.777000Z',
         'idadeDeAposentadoria': 60
     })
