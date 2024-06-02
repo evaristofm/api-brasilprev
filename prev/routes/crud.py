@@ -18,7 +18,6 @@ def create_cliente(db: Session, cliente: serializers.ClienteRequest):
     db.refresh(db_cliente)
     return db_cliente
 
-
 def create_produto(db: Session, produto: serializers.ProdutoRequest):
     db_produto = Produto(**produto.model_dump(), id=uuid.uuid4())
 
@@ -53,20 +52,21 @@ def create_resgate(db: Session, resgate: serializers.ResgateRequest):
     return db_resgate
 
 
-def get_cliente_all(db: Session, cliente_id: str):
-    return db.query(Cliente).all()
+def get_cliente_all(db: Session):
+    return db.exec(select(Cliente)).all()
 
 def get_cliente(db: Session, cliente_id: str):
-    return db.query(Cliente).filter(Cliente.id == cliente_id).first()
+    return db.exec(select(Cliente).filter(Cliente.id == cliente_id)).first()
 
 def get_produto_all(db: Session):
-    return db.query(Produto).all()
+    #return db.exec(Produto).all()
+    return db.exec(select(Cliente)).all() 
 
 def get_produto(db: Session, producto_id: str):
-    return db.query(Produto).filter(Produto.id == producto_id).first()
+    return db.exec(select(Produto).filter(Produto.id == producto_id)).first()
 
 def get_plano_all(db: Session):
-    return db.query(Plano).all()
+    return db.exec(select(Plano)).all()
 
 def get_plano(db: Session, plano_id: str):
-    return db.query(Plano).filter(Plano.id == plano_id).first()
+    return db.exec(select(Plano).filter(Plano.id == plano_id)).first()

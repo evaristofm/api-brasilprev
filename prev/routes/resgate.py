@@ -34,11 +34,14 @@ async def create_resgate(*, session: Session = ActiveSession, resgate_request: R
 
     data_atual = datetime.now()
     dias_diferenca = calcula_data_carencia(db_plano.dataDaContratacao, data_atual)
+    print(dias_diferenca)
 
     if dias_diferenca < db_produto.carenciaInicialDeResgate:
         raise HTTPException(status_code=400, detail="Plano ainda está no período de carência")
 
-    if db_plano.aporte < resgate_request.valorResgate:
+    print(resgate_request.valorResgate)
+    print(db_plano.aporte)
+    if float(db_plano.aporte) < float(resgate_request.valorResgate) :
         raise HTTPException(status_code=400, detail="Saldo insuficiente para resgate.")
 
     db_plano.aporte -= resgate_request.valorResgate
