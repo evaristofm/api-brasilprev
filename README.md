@@ -42,6 +42,15 @@ $ ./tests.sh
 
 ![testes](https://github.com/evaristofm/api-brasilprev/assets/46290279/2d2632e9-6af2-48c6-bf11-078ddc6f9f20)
 
+Conexão com o banco de dados Postgres
+
+```
+POSTGRES_DB=prev || POSTGRES_DB=prev_test
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+PORT=5435
+
+```
 
 Acessando a documentação SWAGGER da API
 
