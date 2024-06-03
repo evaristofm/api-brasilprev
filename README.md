@@ -54,3 +54,4 @@ http://localhost:8000/docs
 
 Video demonstrando passo a passo dos endpoints:
 
+https://drive.google.com/file/d/1VS7nUHmgm39KPteI1sHOhUVGTLG1qZ_1/view?usp=sharing
